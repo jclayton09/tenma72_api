@@ -2,13 +2,18 @@
 name = "tenma72_api"
 version = "0.1.0"
 description = ""
-authors = ["Josh <josh.clayton@iceotope.com>"]
+authors = ["Josh <joshclayton09@outlook.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+uvicorn = "^0.17.6"
+fastapi = "^0.78.0"
 
 [tool.poetry.dev-dependencies]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+tenma72_api = "tenma72_api:run"
