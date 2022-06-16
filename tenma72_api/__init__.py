@@ -3,6 +3,7 @@ import click
 from uvicorn import Config
 
 from .api_run import Server
+from .tenma72 import TenmaSupply
 
 app = FastAPI(docs_url="/")
 
