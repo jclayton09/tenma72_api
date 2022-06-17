@@ -1,8 +1,11 @@
+import logging
 import math
 import string
 from enum import Enum
 from time import sleep
 from serial import Serial
+
+_logger = logging.getLogger(__name__)
 
 
 class TenmaSupply(object):
