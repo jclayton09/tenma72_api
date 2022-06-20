@@ -9,6 +9,7 @@ python = "^3.8"
 uvicorn = "^0.17.6"
 fastapi = "^0.78.0"
 pyserial = "^3.5"
+configparser = "^5.2.0"
 
 [tool.poetry.dev-dependencies]
 
