@@ -4,6 +4,7 @@ from uvicorn import Config
 
 from .api_run import Server
 from .tenma72 import TenmaSupply
+from .config_parsing import ConfigParsing
 
 app = FastAPI(docs_url="/")
 global dev
@@ -255,10 +256,24 @@ def collector_output():
     return {'Power': tmp[0], 'Voltage': tmp[1], 'Current': tmp[2]}
 
 
+@click.argument('COM_PORT')
 @click.option('-h', '--host', default='127.0.0.1')
 @click.option('-p', '--port', default=8000)
 @click.command()
 def run(host, port):
+    """
+    An API for the TENMA 72-XXXX power supplies.
+
+    Args:
+        device (str): Serial port (e.g. /dev/ttyACM0 or COM3)
+    """
+
+    BASE_DIR = Path(__file__).resolve().parent
+    settings_file_location = f"{BASE_DIR}/settings.ini"
+
+    settings_file = ConfigParsing(settings_file_location)
+    settings_file.update_add_value('Settings', 'com_port', com_port)
+
     # loads the variables into the config
     config = Config("tenma72_api:app", host=host, port=port, log_level="info", workers=1)
     server = Server(config=config)  # calls the api_run files function

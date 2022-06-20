@@ -3,6 +3,7 @@ name = "tenma72_api"
 version = "0.1.0"
 description = ""
 authors = ["Josh <joshclayton09@outlook.com>"]
+include = ["settings.ini"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
