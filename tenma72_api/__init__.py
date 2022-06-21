@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import click
 from uvicorn import Config
+from pathlib import Path
 
 from .api_run import Server
 from .tenma72 import TenmaSupply
@@ -8,10 +9,20 @@ from .config_parsing import ConfigParsing
 
 app = FastAPI(docs_url="/")
 global dev
+global com_port
 
 
 @app.on_event("startup")
 def start_up():
+
+    global com_port
+
+    BASE_DIR = Path(__file__).resolve().parent
+    settings_file_location = f"{BASE_DIR}/settings.ini"
+    settings_file = ConfigParsing(settings_file_location)
+    com_port = settings_file.return_value('Settings', 'com_port')
+
+    print(f"INFO:\t  {settings_file_location}")
     connect()
 
 
@@ -21,8 +32,6 @@ def connect():
     Connect to the PSU
     """
     global dev  # bring in the dev veriable
-
-    com_port = "COM3"
 
     try:  # Try to connect to the port
         dev = TenmaSupply(com_port)
@@ -260,7 +269,7 @@ def collector_output():
 @click.option('-h', '--host', default='127.0.0.1')
 @click.option('-p', '--port', default=8000)
 @click.command()
-def run(host, port):
+def run(com_port, host, port):
     """
     An API for the TENMA 72-XXXX power supplies.
 
@@ -272,7 +281,7 @@ def run(host, port):
     settings_file_location = f"{BASE_DIR}/settings.ini"
 
     settings_file = ConfigParsing(settings_file_location)
-    settings_file.update_add_value('Settings', 'com_port', com_port)
+    settings_file.update_value('Settings', 'com_port', com_port)
 
     # loads the variables into the config
     config = Config("tenma72_api:app", host=host, port=port, log_level="info", workers=1)
