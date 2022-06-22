@@ -94,7 +94,7 @@ def voltage_set_get():
 
 
 @app.put("/voltage/set/{voltage}")
-def voltage_set_pet(voltage: int):
+def voltage_set_put(voltage: float):
     """
     Function to set the voltage
     """
@@ -111,7 +111,7 @@ def current_set_get():
 
 
 @app.put("/current/set/{current}")
-def current_set_pet(current: int):
+def current_set_pet(current: float):
     """
     Function to set the current
     """
@@ -249,7 +249,7 @@ def get_power():
 
 
 @app.get("/target_voltage/{target_power}")
-def target_voltage(target_power: int):
+def target_voltage(target_power: float):
     """
     Function to return the needed voltage for a given power
     """

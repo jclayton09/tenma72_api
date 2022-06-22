@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tenma72_api"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Josh <joshclayton09@outlook.com>"]
 include = ["settings.ini"]
@@ -11,6 +11,7 @@ uvicorn = "^0.17.6"
 fastapi = "^0.78.0"
 pyserial = "^3.5"
 configparser = "^5.2.0"
+pathlib = "^1.0.1"
 
 [tool.poetry.dev-dependencies]
 
