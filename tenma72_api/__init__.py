@@ -18,7 +18,7 @@ def start_up():
     global com_port
 
     BASE_DIR = Path(__file__).resolve().parent
-    settings_file_location = f"{BASE_DIR}\settings.ini"
+    settings_file_location = f"{BASE_DIR}/settings.ini"
     settings_file = ConfigParsing(settings_file_location)
     com_port = settings_file.return_value('Settings', 'com_port')
 
